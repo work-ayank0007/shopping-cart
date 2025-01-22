@@ -34,7 +34,7 @@ const Home = () => {
     };
 
     return (
-        <div className="flex flex-wrap justify-center gap-8 p-4 items-end">
+        <div className="flex flex-wrap justify-center gap-8 p-4 items-end poppins-regular">
             {data.map((product) => (
                 <div
                     key={product.id}

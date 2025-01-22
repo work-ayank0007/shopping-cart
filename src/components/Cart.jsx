@@ -8,7 +8,7 @@ const Cart = () => {
     const navigate = useNavigate();
     
     return (
-        <div className="w-full h-full bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="w-full h-full bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 poppins-regular">
             <div className="max-w-screen-xl mx-auto">
                 {cart.length === 0 ? (
                     <div className="flex flex-col items-center justify-center text-center py-12">
