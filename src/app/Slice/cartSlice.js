@@ -21,7 +21,9 @@ export const cartSlice = createSlice({
             setData(state);
         },
         removeFromCart: (state, action) => {
-            return state.filter(item => item.id !== action.payload);
+            const data= state.filter(item => item.id !== action.payload);
+            setData(data);
+            return data;
         },
         incrementQuantity: (state, action) => {
             const item = state.find(item => item.id === action.payload);
