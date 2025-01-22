@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart,removeFromCart } from "../app/Slice/cartSlice";
+import { addToCart, removeFromCart } from "../app/Slice/cartSlice";
 import axios from "axios";
 import { BsCartPlus, BsCartX } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const Home = () => {
     const [data, setData] = useState([]);
-    const cart = useSelector((state) => state.cart); // Access cart state directly
+    const cart = useSelector((state) => state.cart); 
     const dispatch = useDispatch();
 
-    // Fetch product data
     useEffect(() => {
         axios
             .get("https://fakestoreapi.com/products")
@@ -20,19 +20,16 @@ const Home = () => {
                 console.error("There was an error fetching the data:", error);
             });
     }, []);
-    useEffect(()=>{
-        console.log(cart);
-        
-    },[cart])
-    // Check if product is in the cart
+
     const isInCart = (id) => cart.some((item) => item.id === id);
 
-    // Handle adding/removing from cart
     const handleCartClick = (product) => {
         if (isInCart(product.id)) {
-            dispatch(removeFromCart(product.id)); // Remove from cart if it's already there
+            dispatch(removeFromCart(product.id));
+            toast.error(`${product.title} removed from cart!`, { position: "top-right" });
         } else {
-            dispatch(addToCart(product)); // Add to cart if not already there
+            dispatch(addToCart(product));
+            toast.success(`${product.title} added to cart!`, { position: "top-right" });
         }
     };
 
@@ -46,7 +43,7 @@ const Home = () => {
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="h-48 rounded-t-lg object-fit mb-4 mx-auto"
+                        className="h-48 w-32 rounded-t-lg object-contain mb-4 mx-auto"
                     />
                     <h2 className="text-xl font-semibold">{product.title}</h2>
                     <p className="text-gray-500 text-sm mt-2">
